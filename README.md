@@ -8,3 +8,10 @@ Ultimately I want to build predictive models to identify the next Alistair Cook/
 But in reality it will probably just be some nice graphs I made.
 
 
+## World Test Championship Final
+
+<p align="center">
+  <img width="250" height="200" src="https://github.com/committedtotape/i-dont-like-cricket/blob/main/world_test_finals/plots/world_test_championship.png">
+</p>
+
+
