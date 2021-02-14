@@ -11,7 +11,7 @@ But in reality it will probably just be some nice graphs I made.
 ## World Test Championship Final
 
 <p align="center">
-  <img width="250" height="200" src="https://github.com/committedtotape/i-dont-like-cricket/blob/main/world_test_finals/plots/world_test_championship.png">
+  <img width="700" height="500" src="https://github.com/committedtotape/i-dont-like-cricket/blob/main/world_test_finals/plots/world_test_championship.png">
 </p>
 
 
