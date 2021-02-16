@@ -3,6 +3,7 @@ library(ggtext)
 library(glue)
 library(here)
 
+# Build dataset of all possible scores and outcomes
 wins <- tibble(india = 0:4, england = 0:4)
 
 outcomes <- expand(wins, india, england) %>% 
@@ -12,12 +13,19 @@ outcomes <- expand(wins, india, england) %>%
                               india == 1 & england == 0 ~ "AUS",
                               TRUE ~ "IND"))
 
+# current score and matches remaining - change after each match
 current_score <- outcomes %>% 
-  filter(england == 1, india == 0)
+  filter(england == 1, india == 1)
 
+matches_remaining <- 2
+
+# is outcome now possible based on current state of series?
 possible_outcomes <- outcomes %>% 
   mutate(not_possible = england < current_score$england |
-         india < current_score$india)
+                        india < current_score$india |
+                        england > current_score$england + matches_remaining |
+                        india > current_score$india + matches_remaining
+           )
 
 col_pal <- c("#ECD42E", "#042B56", "#ADDCE7")
 
@@ -46,6 +54,13 @@ ggplot() +
                              <span style='color:#ADDCE7'>**India need to claim the series with at least 2 wins**</span>"), 
                 fill = NA, label.color = NA, size = 5, 
                 family = "Avenir Next Condensed", hjust = 1) +
+  geom_richtext(data = NULL, 
+                aes(x = 5.4, y = 1.8, 
+                    label = glue("*The series is currently {current_score$india}-{current_score$england} with {matches_remaining} matches<br> to go,
+                                 meaning all 3 teams could<br>
+                                 still qualify for the final*")), 
+                fill = NA, label.color = NA, size = 5, 
+                family = "Avenir Next Condensed", hjust = 1) +
   scale_fill_manual(values = col_pal) +
   scale_x_continuous("India Wins", breaks = 0:4) +
   scale_y_continuous("England Wins") +
@@ -64,4 +79,4 @@ ggplot() +
         axis.title.x = element_text(hjust = 1, size = 12, face = "bold"),
         axis.text = element_text(size = 12))
 
-ggsave(here("world_test_finals","plots","world_test_championship.png"), width = 13, height = 8)
+ggsave(here("world_test_finals","plots","world_test_championship_after_2.png"), width = 13, height = 8)
