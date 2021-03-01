@@ -6,7 +6,6 @@ library(rvest)
 library(ggforce)
 library(glue)
 library(ggtext)
-library(ggrepel)
 library(shadowtext)
 library(hrbrthemes)
 
